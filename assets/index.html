@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Zedecco Gate | Edge Gateway Console</title>
+  <link rel="stylesheet" href="/assets/app.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+</head>
+<body>
+  <!-- Ambient Background -->
+  <div class="ambient-canvas">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+    <div class="ambient-grid"></div>
+  </div>
+
+  <div class="app-layout">
+    <!-- Main Header -->
+    <header class="main-header">
+      <div class="header-container">
+        <!-- Brand Logo -->
+        <a href="#/home" class="brand-section">
+          <div class="brand-logo-wrap">
+            <svg class="brand-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="brand-text-wrap">
+            <div class="brand-title">
+              <span>ZEDECCO</span>
+              <span class="brand-highlight">GATE</span>
+              <span class="brand-badge">v1.0</span>
+            </div>
+            <span class="brand-desc">Single-Port Edge Multiplexer</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Tabs -->
+        <nav class="desktop-nav">
+          <a href="#/home" class="nav-tab-btn active" data-page="home">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span>Overview</span>
+          </a>
+          <a href="#/subs" class="nav-tab-btn" data-page="subs">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <span>Subscriptions</span>
+          </a>
+          <a href="#/nodes" class="nav-tab-btn" data-page="nodes">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 6h16V4H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2z"/>
+            </svg>
+            <span>Nodes</span>
+          </a>
+          <a href="#/usage" class="nav-tab-btn" data-page="usage">
+            <svg class="nav-tab-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/>
+            </svg>
+            <span>Traffic</span>
+          </a>
+        </nav>
+
+        <!-- Right Actions -->
+        <div class="header-actions">
+          <button type="button" class="btn-icon-action" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+          <a href="logout" class="btn-logout" title="Sign Out">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+      
+      <!-- ================= 1. OVERVIEW VIEW ================= -->
+      <section id="view-home" class="view-container active">
+        <div class="overview-grid">
+          
+          <!-- Server Status Hero Card -->
+          <div class="status-hero-card">
+            <div class="status-hero-inner">
+              <div class="status-hero-left">
+                <div class="status-indicator-ring">
+                  <div class="status-pulse-dot"></div>
+                </div>
+                <div class="status-hero-info">
+                  <div class="status-subtitle">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                      <circle cx="12" cy="12" r="6"/>
+                    </svg>
+                    <span>System Online &bull; Single Port Multiplexed</span>
+                  </div>
+                  <h2 class="status-main-title" id="statLocation">Detecting Server Location...</h2>
+                  <div class="status-engine-tags" id="engineTags">
+                    <span class="engine-pill active">sing-box</span>
+                    <span class="engine-pill active">Xray-core</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="status-hero-actions">
+                <a href="#/subs" class="btn-primary">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                  </svg>
+                  <span>Get Subscription</span>
+                </a>
+                <a href="#/nodes" class="btn-secondary">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M4 6h16V4H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2z"/>
+                  </svg>
+                  <span>Explore Nodes</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Row -->
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-icon-box blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Server Host / IP</span>
+                <span class="metric-value" id="statHost">--</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-box cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                  <line x1="6" y1="6" x2="6.01" y2="6"/>
+                  <line x1="6" y1="18" x2="6.01" y2="18"/>
+                </svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Public Port</span>
+                <span class="metric-value" id="statPort">--</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-box purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">System Uptime</span>
+                <span class="metric-value" id="statUptime">--</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon-box amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Live Speed</span>
+                <span class="metric-value"><span id="liveSpeedDown">0 B/s</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supported Protocols Matrix -->
+          <div class="section-header-row">
+            <h3 class="section-title">
+              <span class="section-title-bar"></span>
+              <span>Multiplexed Protocols Matrix</span>
+            </h3>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-box">
+              <div class="feature-header">
+                <div class="feature-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <h4 class="feature-name">VLESS &amp; VMess</h4>
+              </div>
+              <p class="feature-desc">High-speed WebSocket, HTTPUpgrade, and gRPC routing with dynamic TLS multiplexing.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-header">
+                <div class="feature-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                </div>
+                <h4 class="feature-name">Trojan &amp; Reality</h4>
+              </div>
+              <p class="feature-desc">Undetectable TLS camouflage simulating popular destinations without certificate leaks.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-header">
+                <div class="feature-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                  </svg>
+                </div>
+                <h4 class="feature-name">VLESS-XHTTP</h4>
+              </div>
+              <p class="feature-desc">Next-gen HTTP/3 &amp; HTTP/2 streaming proxy powered by modern Xray-core backend.</p>
+            </div>
+
+            <div class="feature-box">
+              <div class="feature-header">
+                <div class="feature-icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <h4 class="feature-name">Shadowsocks &amp; WireGuard</h4>
+              </div>
+              <p class="feature-desc">Standard AEAD ciphers with v2ray-plugin and full WireGuard peer profile generation.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ================= 2. SUBSCRIPTIONS VIEW ================= -->
+      <section id="view-subs" class="view-container">
+        <div class="sub-panel-card">
+          
+          <div class="sub-panel-top">
+            <div>
+              <h2 class="section-title">
+                <span class="section-title-bar"></span>
+                <span>Subscription Feeds</span>
+              </h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                Import proxy node bundles directly into your favorite VPN client.
+              </p>
+            </div>
+
+            <!-- Protocol Switcher -->
+            <div class="proto-selector">
+              <span class="proto-label">Subscription Mode:</span>
+              <div class="proto-switch-group">
+                <button type="button" id="protoBtnHttp" class="proto-btn active" title="Cleartext HTTP for raw IP:port">HTTP (v2rayN / Windows)</button>
+                <button type="button" id="protoBtnHttps" class="proto-btn" title="HTTPS with SSL Proxy or Domain">HTTPS (SSL Proxy)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compatibility Guidance Banner -->
+          <div class="compat-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <div>
+              <strong>Client Setup Guide:</strong> For <strong>v2rayN on Windows</strong> using raw IP:port, use the <strong>HTTP</strong> subscription mode to prevent SSL handshake errors. For <strong>v2rayNG on Android</strong>, ensure cleartext HTTP updates are allowed or use an HTTPS reverse proxy domain.
+            </div>
+          </div>
+
+          <!-- Subscription Items -->
+          <div class="subs-list">
+            <!-- 1. Universal Base64 -->
+            <div class="sub-card">
+              <div class="sub-card-header">
+                <div class="sub-card-title-group">
+                  <span class="sub-tag-badge rec">Recommended</span>
+                  <span class="sub-client-title">Universal Base64 (v2rayN / v2rayNG / Hiddify / Streisand)</span>
+                </div>
+              </div>
+              <div class="sub-input-row">
+                <input type="text" id="urlSubCompat" class="sub-url-input" readonly>
+                <button type="button" class="btn-action copy" data-action="copy-input" data-target="urlSubCompat">Copy Sub</button>
+                <button type="button" class="btn-action qr" data-action="qr-input" data-target="urlSubCompat" data-title="Universal Subscription QR">QR</button>
+              </div>
+            </div>
+
+            <!-- 2. Clash Meta / Mihomo -->
+            <div class="sub-card">
+              <div class="sub-card-header">
+                <div class="sub-card-title-group">
+                  <span class="sub-tag-badge clash">Clash Meta</span>
+                  <span class="sub-client-title">Clash Meta / Mihomo (Clash Verge Rev / Flclash)</span>
+                </div>
+              </div>
+              <div class="sub-input-row">
+                <input type="text" id="urlSubClash" class="sub-url-input" readonly>
+                <button type="button" class="btn-action copy" data-action="copy-input" data-target="urlSubClash">Copy Clash</button>
+                <button type="button" class="btn-action qr" data-action="qr-input" data-target="urlSubClash" data-title="Clash Meta YAML QR">QR</button>
+              </div>
+            </div>
+
+            <!-- 3. Sing-box Client JSON -->
+            <div class="sub-card">
+              <div class="sub-card-header">
+                <div class="sub-card-title-group">
+                  <span class="sub-tag-badge singbox">Sing-box</span>
+                  <span class="sub-client-title">Sing-box JSON Outbounds Config</span>
+                </div>
+              </div>
+              <div class="sub-input-row">
+                <input type="text" id="urlSubSb" class="sub-url-input" readonly>
+                <button type="button" class="btn-action copy" data-action="copy-input" data-target="urlSubSb">Copy JSON</button>
+              </div>
+            </div>
+
+            <!-- 4. Full / Advanced Subscription -->
+            <div class="sub-card">
+              <div class="sub-card-header">
+                <div class="sub-card-title-group">
+                  <span class="sub-tag-badge full">All Protocols</span>
+                  <span class="sub-client-title">Full Advanced Subscription (Experimental &amp; Raw Nodes)</span>
+                </div>
+              </div>
+              <div class="sub-input-row">
+                <input type="text" id="urlSubFull" class="sub-url-input" readonly>
+                <button type="button" class="btn-action copy" data-action="copy-input" data-target="urlSubFull">Copy Full</button>
+              </div>
+            </div>
+
+            <!-- 5. WireGuard Profile -->
+            <div class="sub-card" id="wgSubCard">
+              <div class="sub-card-header">
+                <div class="sub-card-title-group">
+                  <span class="sub-tag-badge wg">WireGuard</span>
+                  <span class="sub-client-title">WireGuard Tunnel Profile (wg0.conf)</span>
+                </div>
+              </div>
+              <div class="sub-input-row">
+                <input type="text" id="urlSubWg" class="sub-url-input" readonly>
+                <button type="button" class="btn-action copy" data-action="copy-input" data-target="urlSubWg">Copy URL</button>
+                <a href="/gate/wg.conf" id="btnDownloadWg" download="wg0.conf" class="btn-action download">Download .conf</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ================= 3. NODES VIEW ================= -->
+      <section id="view-nodes" class="view-container">
+        
+        <!-- Filter & Search Toolbar -->
+        <div class="nodes-filter-bar">
+          <div class="search-box-wrap">
+            <svg class="search-box-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="nodeSearchInput" class="search-input" placeholder="Search by name, protocol, or transport...">
+          </div>
+
+          <div class="filter-pills">
+            <button type="button" class="filter-btn active" data-filter="all">All</button>
+            <button type="button" class="filter-btn" data-filter="vless">VLESS</button>
+            <button type="button" class="filter-btn" data-filter="vmess">VMess</button>
+            <button type="button" class="filter-btn" data-filter="trojan">Trojan</button>
+            <button type="button" class="filter-btn" data-filter="reality">Reality</button>
+            <button type="button" class="filter-btn" data-filter="ss">Shadowsocks</button>
+            <button type="button" class="filter-btn" data-filter="grpc">gRPC</button>
+            <button type="button" class="filter-btn" data-filter="wg">WireGuard</button>
+          </div>
+        </div>
+
+        <!-- Dynamic Cards Grid -->
+        <div id="nodesGrid" class="nodes-cards-grid">
+          <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; color: var(--text-muted);">
+            <span>Loading active proxy nodes...</span>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ================= 4. USAGE VIEW ================= -->
+      <section id="view-usage" class="view-container">
+        
+        <!-- Top Usage Metrics -->
+        <div class="usage-top-metrics">
+          <div class="usage-card">
+            <div class="usage-card-top">
+              <span class="usage-card-label">Today (UTC)</span>
+            </div>
+            <span class="usage-card-val" id="usageDayTotal">0 B</span>
+            <div class="usage-card-split">
+              <span>&uarr; <b id="usageDayUp">0 B</b></span>
+              <span>&darr; <b id="usageDayDown">0 B</b></span>
+            </div>
+          </div>
+
+          <div class="usage-card">
+            <div class="usage-card-top">
+              <span class="usage-card-label">This Month <span id="usageMonthKey"></span></span>
+            </div>
+            <span class="usage-card-val" id="usageMonthTotal">0 B</span>
+            <div class="usage-card-split">
+              <span>&uarr; <b id="usageMonthUp">0 B</b></span>
+              <span>&darr; <b id="usageMonthDown">0 B</b></span>
+            </div>
+          </div>
+
+          <div class="usage-card">
+            <div class="usage-card-top">
+              <span class="usage-card-label">All-Time Total</span>
+            </div>
+            <span class="usage-card-val" id="usageAllTotal">0 B</span>
+            <div class="usage-card-split">
+              <span>&uarr; <b id="usageAllUp">0 B</b></span>
+              <span>&darr; <b id="usageAllDown">0 B</b></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Quota Alert Card -->
+        <div class="limit-alert-card" id="limitCard" style="display: none;">
+          <div class="limit-alert-top">
+            <span id="limitText">--</span>
+            <span id="limitPct">--</span>
+          </div>
+          <div class="limit-progress-bar">
+            <div class="limit-progress-fill" id="limitProgressFill"></div>
+          </div>
+          <span class="limit-alert-msg" id="limitMsg">--</span>
+        </div>
+
+        <!-- Protocol Breakdown Table -->
+        <div class="traffic-table-box">
+          <table class="traffic-table">
+            <thead>
+              <tr>
+                <th>Protocol</th>
+                <th>Active</th>
+                <th>Today</th>
+                <th>Month Up</th>
+                <th>Month Down</th>
+                <th>Month Total</th>
+                <th>All Time</th>
+              </tr>
+            </thead>
+            <tbody id="trafficRows">
+              <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 24px;">Loading traffic stats...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Traffic Controls -->
+        <div class="usage-actions-row">
+          <div class="sync-box">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Sync month usage with provider:</span>
+            <input type="number" id="inputSyncGb" class="sync-input" placeholder="GiB used" min="0" step="0.1">
+            <button type="button" id="btnSyncTraffic" class="btn-action copy">Set</button>
+          </div>
+          <button type="button" id="btnResetTraffic" class="btn-action qr" style="color: var(--accent-rose);">Reset Counters</button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-inner">
+        <div>Zedecco Gate &bull; High-Performance Edge Multiplexer</div>
+        <div>All Protocols on 1 Port &bull; Zero Logs &bull; Open Source</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="mobile-nav-bar">
+    <a href="#/home" class="mob-tab-btn active" data-page="home">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Overview</span>
+    </a>
+    <a href="#/subs" class="mob-tab-btn" data-page="subs">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      <span>Sub</span>
+    </a>
+    <a href="#/nodes" class="mob-tab-btn" data-page="nodes">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h16V4H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2zm0 5h16v-2H4v2z"/></svg>
+      <span>Nodes</span>
+    </a>
+    <a href="#/usage" class="mob-tab-btn" data-page="usage">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/></svg>
+      <span>Traffic</span>
+    </a>
+  </nav>
+
+  <!-- QR Code Modal -->
+  <div id="qrModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="qrModalTitle">Scan QR Code</h3>
+        <button type="button" class="btn-close-modal" id="qrCloseBtn">&times;</button>
+      </div>
+      <div class="modal-qr-body">
+        <div id="qrcodeWrapper"></div>
+      </div>
+      <p class="modal-subtext">Scan using v2rayN, v2rayNG, Hiddify, or Streisand.</p>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="zgToast" class="toast-notice"></div>
+
+  <script src="/assets/app.js"></script>
+</body>
+</html>
